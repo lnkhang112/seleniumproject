@@ -14,4 +14,4 @@ class InforPage():
         sleep(2)
 
     # Xác thực đã vào trang My Info
-        assert "viewPersonalDetails" in self.driver.current_url.lower()
+        assert "info" in self.driver.current_url.lower()

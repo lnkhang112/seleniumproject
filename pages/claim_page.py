@@ -14,4 +14,4 @@ class ClaimPage():
         sleep(2)
 
     # Xác thực đã vào trang Maintenance
-        assert "maintenance" in self.driver.current_url.lower()
+        assert "claim" in self.driver.current_url.lower()

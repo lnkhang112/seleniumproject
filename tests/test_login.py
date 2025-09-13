@@ -13,10 +13,9 @@ from pages.time_page import TimePage
 from pages.infor_page import InforPage
 from pages.performance_page import PerformancePage
 from pages.directory_page import DerictoryPage
-# from pages.maintenance_page import MantenancePage
+from pages.maintenance_page import MantenancePage
 from pages.claim_page import ClaimPage
 from pages.buzz_page import BuzzPage
-
 @pytest.mark.usefixtures("setup")
 class TestLogin(BaseTest):
 
@@ -33,39 +32,38 @@ class TestLogin(BaseTest):
         recruitment = Recruitment(self.driver)
         recruitment.verify_candidates_tab()
 
-        # admin_page = AdminPage(self.driver)
-        # admin_page.go_to_admin_page()
+        admin_page = AdminPage(self.driver)
+        admin_page.go_to_admin_page()
 
-        # pim_page = PimPage(self.driver)
-        # pim_page.go_to_pim_page()
+        pim_page = PimPage(self.driver)
+        pim_page.go_to_pim_page()
 
-        # leave_page = LeavePage(self.driver)
-        # leave_page.go_to_leave_page()
+        leave_page = LeavePage(self.driver)
+        leave_page.go_to_leave_page()
 
-        # time_page = TimePage(self.driver)
-        # time_page.go_to_time_page()
+        time_page = TimePage(self.driver)
+        time_page.go_to_time_page()
 
         # infor_page = InforPage(self.driver)
         # infor_page.go_to_infor_page()
 
-        # performance_page = PerformancePage(self.driver)
-        # performance_page.go_to_performance_page()
+        performance_page = PerformancePage(self.driver)
+        performance_page.go_to_performance_page()
 
-        # directory_page = DerictoryPage(self.driver)
-        # directory_page.go_to_directory_page()
+        directory_page = DerictoryPage(self.driver)
+        directory_page.go_to_directory_page()
 
         # maintenance_page = MantenancePage(self.driver)
         # maintenance_page.go_to_maintenance_page()
 
-        # claim_page = ClaimPage(self.driver)
-        # claim_page.go_to_claim_page()
+        claim_page = ClaimPage(self.driver)
+        claim_page.go_to_claim_page()
 
         buzz_page = BuzzPage(self.driver)
         buzz_page.go_to_buzz_page()
-
-
-
-        sleep(2)
         
         # assert "dashboard" in self.driver.current_url.lower()
         # assert "recruitment" in self.driver.current_url.lower()
+        
+        sleep(2)
+        
