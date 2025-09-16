@@ -7,13 +7,19 @@ from time import sleep
 
 class LoginPage(BasePage):
     
+    username = (By.XPATH,"//input[@name='username']")
+    password = (By.XPATH,"//input[@name='password']")
+    loginbt = (By.XPATH,"//button[@type='submit']")
+    
     def __init__(self, driver):
         super().__init__(driver)
     
-    def login(self):
-        self.driver.find_element(By.XPATH,"//input[@name='username']").send_keys("Admin")
-        self.driver.find_element(By.XPATH,"//input[@name='password']").send_keys("admin123")
-        loginbt = self.driver.find_element(By.XPATH,"//button[@type='submit']").click()
+    def login(self,user,password):
+        self.get_element(self.username).send_keys(user)
+        self.get_element(self.password).send_keys(password)
+        self.click(self.loginbt)
         
-        # self.get_element(self.username)
-        sleep(5)
+        self.get_element
+        
+
+    

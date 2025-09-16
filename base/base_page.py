@@ -1,25 +1,24 @@
-import pytest
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.by import By
 
 class BasePage:
+    
     def __init__(self, driver):
         self.driver = driver
+        self.wait = WebDriverWait(driver, 10)
         
-    def get_element(self, by_locator):
-        return self.driver.find_element(*by_locator)
-
+    #Wait for element
+    def get_element(self, xpath):
+        element = self.wait.until(EC.presence_of_element_located(xpath))
+        return element
     
-    def click(self, element):
-        element.click()
-
-    def wait(self):
-        wait = WebDriverWait(self.driver, 10)
-        element = wait.until(EC.element_to_be_clickable((By.ID, 'someid')))
-
-    def dropdown(self, by_locator, visible_text):
-        select = Select(self.driver.find_element(*by_locator))
-        select.select_by_visible_text(visible_text)
+    #Wait for button to clickable
+    def click(self, xpath):
+        self.wait.until(EC.presence_of_element_located(xpath)).click()
+        
+    #Method to input text
+    def send_keys(self, xpath, text):
+        element = self.wait.until(EC.presence_of_element_located(xpath))
+        element.send_keys(text)

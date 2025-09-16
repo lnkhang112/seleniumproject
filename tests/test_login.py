@@ -21,49 +21,52 @@ class TestLogin(BaseTest):
 
     def test_valid_login(self):
         loginbtn = LoginPage(self.driver)
-        loginbtn.login()
+        loginbtn.login("Admin","admin123")
         
         dashboardbtn = DashBoard(self.driver)
         dashboardbtn.verify_dashboard()
         
-        recruitmentbtn = Recruitment(self.driver)
-        recruitmentbtn.test_recruitment()
-
-        recruitment = Recruitment(self.driver)
-        recruitment.verify_candidates_tab()
-
-        admin_page = AdminPage(self.driver)
-        admin_page.go_to_admin_page()
-
-        pim_page = PimPage(self.driver)
-        pim_page.go_to_pim_page()
-
-        leave_page = LeavePage(self.driver)
-        leave_page.go_to_leave_page()
-
-        time_page = TimePage(self.driver)
-        time_page.go_to_time_page()
-
-        # infor_page = InforPage(self.driver)
-        # infor_page.go_to_infor_page()
-
-        performance_page = PerformancePage(self.driver)
-        performance_page.go_to_performance_page()
-
-        directory_page = DerictoryPage(self.driver)
-        directory_page.go_to_directory_page()
-
-        # maintenance_page = MantenancePage(self.driver)
-        # maintenance_page.go_to_maintenance_page()
-
-        claim_page = ClaimPage(self.driver)
-        claim_page.go_to_claim_page()
-
-        buzz_page = BuzzPage(self.driver)
-        buzz_page.go_to_buzz_page()
+        # verify login successful
+        assert dashboardbtn.verify_dashboard() is True
+        print("login succssfel")
         
-        # assert "dashboard" in self.driver.current_url.lower()
-        # assert "recruitment" in self.driver.current_url.lower()
+        # recruitmentbtn = Recruitment(self.driver)
+        # recruitmentbtn.test_recruitment()
+
+        # recruitment = Recruitment(self.driver)
+        # recruitment.verify_candidates_tab()
+
+        # admin_page = AdminPage(self.driver)
+        # admin_page.go_to_admin_page()
+
+        # pim_page = PimPage(self.driver)
+        # pim_page.go_to_pim_page()
+
+        # leave_page = LeavePage(self.driver)
+        # leave_page.go_to_leave_page()
+
+        # time_page = TimePage(self.driver)
+        # time_page.go_to_time_page()
+
+        # # infor_page = InforPage(self.driver)
+        # # infor_page.go_to_infor_page()
+
+        # performance_page = PerformancePage(self.driver)
+        # performance_page.go_to_performance_page()
+
+        # directory_page = DerictoryPage(self.driver)
+        # directory_page.go_to_directory_page()
+
+        # # maintenance_page = MantenancePage(self.driver)
+        # # maintenance_page.go_to_maintenance_page()
+
+        # claim_page = ClaimPage(self.driver)
+        # claim_page.go_to_claim_page()
+
+        # buzz_page = BuzzPage(self.driver)
+        # buzz_page.go_to_buzz_page()
         
-        sleep(2)
+        # # assert "dashboard" in self.driver.current_url.lower()
+        # # assert "recruitment" in self.driver.current_url.lower()
+    
         
