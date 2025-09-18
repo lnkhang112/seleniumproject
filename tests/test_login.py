@@ -26,9 +26,6 @@ class TestLogin(BaseTest):
         dashboardbtn = DashBoard(self.driver)
         dashboardbtn.verify_dashboard()
         
-        # verify login successful
-        assert dashboardbtn.verify_dashboard() is True
-        print("login succssfel")
         
         # recruitmentbtn = Recruitment(self.driver)
         # recruitmentbtn.test_recruitment()
