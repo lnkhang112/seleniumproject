@@ -22,3 +22,9 @@ class BasePage:
     def send_keys(self, xpath, text):
         element = self.wait.until(EC.presence_of_element_located(xpath))
         element.send_keys(text)
+
+    def dop_down(self, xpath, text):
+        element = self.wait.until(EC.presence_of_element_located(xpath))
+        element.send_keys(text)
+        
+    

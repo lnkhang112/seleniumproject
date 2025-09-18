@@ -1,29 +1,30 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from time import sleep
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from base.base_test import BaseTest
+from base.base_page import BasePage
 
 
 @pytest.mark.usefixtures("setup")
-class Recruitment():
+class Recruitment(BasePage):
+    Recruitment = (By.XPATH, "//span[text()='Recruitment']")
+    header = (By.XPATH, "//h5[text()='Candidates']")
+    vacancies = (By.XPATH, "//a[@class='oxd-topbar-body-nav-tab-item']")
+    
+    
     def __init__(self,driver):
         self.driver = driver
+        self.wait = WebDriverWait(driver,10)
 
     def test_recruitment(self):
     # Click vào menu Recruitment
-        self.driver.find_element(By.XPATH, "//span[text()='Recruitment']").click()
-        sleep(2)
-
+        self.wait.until(EC.presence_of_element_located(self.Recruitment)).click()
     def verify_candidates_tab(self):
     # Xác thực đã vào trang Candidates
-        header = self.driver.find_element(By.XPATH, "//h5[text()='Candidates']")
-        assert header.is_displayed()
+        self.wait.until(EC.presence_of_element_located(self.header)).click()
 
-    # def verify_vacancies_tab(self):
-    # # Click vào tab Vacancies
-    #     self.driver.find_element(By.XPATH, '//a[@class='oxd-topbar-body-nav-tab-item'"]').click()
-
-    # # Xác thực đã vào đúng tab
-    #     header = self.driver.find_element(By.XPATH, "//h5[text()='Vacancies']")
-    #     assert header.is_displayed()
+    def verify_vacancies_tab(self):
+        self.click(self.vacancies)
+    

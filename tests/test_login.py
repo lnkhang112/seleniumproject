@@ -27,8 +27,8 @@ class TestLogin(BaseTest):
         dashboardbtn.verify_dashboard()
         
         
-        # recruitmentbtn = Recruitment(self.driver)
-        # recruitmentbtn.test_recruitment()
+        recruitmentbtn = Recruitment(self.driver)
+        recruitmentbtn.test_recruitment()
 
         # recruitment = Recruitment(self.driver)
         # recruitment.verify_candidates_tab()

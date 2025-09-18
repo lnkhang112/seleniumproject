@@ -1,6 +1,6 @@
 import requests
 
-BASE_URL = "https://reqres.in/api"   # API public miễn phí
+BASE_URL = "https://reqres.in/api"   
 
 def get_user(user_id):
     url = f"{BASE_URL}/users/{user_id}"
