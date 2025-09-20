@@ -42,4 +42,10 @@ jobs:
 
     - name: Run tests
       run: |
-        pytest
+        pytest -m smoke --html=report.html --self-contained-html
+
+    - name: Upload Test Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: Test Report
+        path: report/report.html

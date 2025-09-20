@@ -18,7 +18,7 @@ from pages.claim_page import ClaimPage
 from pages.buzz_page import BuzzPage
 @pytest.mark.usefixtures("setup")
 class TestLogin(BaseTest):
-
+    @pytest.mark.smoke
     def test_valid_login(self):
         loginbtn = LoginPage(self.driver)
         loginbtn.login("Admin","admin123")
