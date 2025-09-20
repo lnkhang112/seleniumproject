@@ -16,12 +16,15 @@ from pages.directory_page import DerictoryPage
 from pages.maintenance_page import MantenancePage
 from pages.claim_page import ClaimPage
 from pages.buzz_page import BuzzPage
+from utils.config_reader import ConfigReader
 @pytest.mark.usefixtures("setup")
 class TestLogin(BaseTest):
     @pytest.mark.smoke
     def test_valid_login(self):
-        loginbtn = LoginPage(self.driver)
-        loginbtn.login("Admin","admin123")
+        
+        getuser = ConfigReader.get_username(self.driver)
+        getpass = ConfigReader.get_password(self.driver)
+        
         
         dashboardbtn = DashBoard(self.driver)
         dashboardbtn.verify_dashboard()
