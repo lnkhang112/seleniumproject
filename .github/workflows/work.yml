@@ -42,7 +42,8 @@ jobs:
 
     - name: Run tests
       run: |
-        pytest -m smoke --html=report.html --self-contained-html
+        mkdir -p report
+        pytest -m smoke --html=report/report.html --self-contained-html
 
     - name: Upload Test Report
       uses: actions/upload-artifact@v2
