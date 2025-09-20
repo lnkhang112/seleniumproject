@@ -12,7 +12,7 @@ class BaseTest:
     def setup(self, request):
 
         Options = webdriver.ChromeOptions()
-        Options.add_argument("--headless=new")
+        #Options.add_argument("--headless=new")
         driver = webdriver.Chrome()
         driver.maximize_window()
         base_url = ConfigReader.get_base_url()

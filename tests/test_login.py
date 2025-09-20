@@ -24,7 +24,8 @@ class TestLogin(BaseTest):
         
         getuser = ConfigReader.get_username(self.driver)
         getpass = ConfigReader.get_password(self.driver)
-        
+        login = LoginPage(self.driver)
+        login.login(getuser, getpass)
         
         dashboardbtn = DashBoard(self.driver)
         dashboardbtn.verify_dashboard()
