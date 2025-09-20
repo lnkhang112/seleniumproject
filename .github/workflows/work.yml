@@ -80,8 +80,10 @@ jobs:
 
     - name: Install ChromeDriver
       run: |
-        # Cài đặt unzip trước
-        sudo apt-get install -y unzip
+        # Kiểm tra xem unzip đã có sẵn chưa, nếu chưa thì cài đặt
+        if ! dpkg -s unzip >/dev/null 2>&1; then
+          sudo apt-get install -y unzip
+        fi
         # Kiểm tra Chrome phiên bản
         CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
         # Lấy phiên bản ChromeDriver tương ứng
@@ -108,3 +110,4 @@ jobs:
       with:
         name: Test Report
         path: report/report.html
+
