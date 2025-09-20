@@ -1,3 +1,56 @@
+# name: Run Selenium Pytest
+# on:
+#   push:
+#     branches: [master]
+#   pull_request:
+#     branches: [master]
+
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v2
+
+#     - name: Set up Python
+#       uses: actions/setup-python@v2
+#       with:
+#         python-version: '3.13'
+
+#     - name: Install Google Chrome
+#       run: |
+#         wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+#         sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+#         sudo apt-get update
+#         sudo apt-get install -y google-chrome-stable
+
+#     - name: Install ChromeDriver
+#       run: |
+#         sudo apt-get install -yqq unzip
+#         CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
+#         CHROMEDRIVER_VERSION=$(wget -qO- "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}")
+#         wget -O /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+#         unzip /tmp/chromedriver.zip -d /tmp/
+#         sudo mv /tmp/chromedriver /usr/local/bin/
+#         sudo chmod +x /usr/local/bin/chromedriver
+
+#     - name: Install dependencies
+#       run: |
+#         python -m pip install --upgrade pip
+#         pip install -r requirements.txt
+
+#     - name: Run tests
+#       run: |
+#         mkdir -p report
+#         pytest -m smoke --html=report/report.html --self-contained-html
+
+#     - name: Upload Test Report
+#       uses: actions/upload-artifact@v4
+#       with:
+#         name: Test Report
+#         path: report/report.html
+
 name: Run Selenium Pytest
 on:
   push:
@@ -27,11 +80,16 @@ jobs:
 
     - name: Install ChromeDriver
       run: |
-        sudo apt-get install -yqq unzip
+        # Cài đặt unzip trước
+        sudo apt-get install -y unzip
+        # Kiểm tra Chrome phiên bản
         CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
+        # Lấy phiên bản ChromeDriver tương ứng
         CHROMEDRIVER_VERSION=$(wget -qO- "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}")
+        # Tải ChromeDriver và giải nén
         wget -O /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
         unzip /tmp/chromedriver.zip -d /tmp/
+        # Di chuyển và cấp quyền thực thi cho ChromeDriver
         sudo mv /tmp/chromedriver /usr/local/bin/
         sudo chmod +x /usr/local/bin/chromedriver
 
