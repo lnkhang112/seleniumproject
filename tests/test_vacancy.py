@@ -4,9 +4,6 @@ from pages.dashboard_page import DashBoard
 from pages.recruitment_page import Recruitment
 from pages.vacancy_page import Vacancy
 
-
-
-
 class TestVacancyPage(BaseTest):
 
 
