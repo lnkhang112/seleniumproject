@@ -16,7 +16,8 @@ class Vacancy(BasePage):
     ADD_HIRING_MANAGER = (By.XPATH, '//input[@placeholder="Type for hints..."]')
     ADD_POSITION = (By.XPATH,'//label[contains(text(), "Number of Positions")]/../../div/input')
     SAVE_BUTTON = (By.XPATH, '//button[@type="submit"]')
-    
+    DROPDOWN = (By.XPATH,'class="oxd-select-wrapper"')
+    JOB_TITLE = (By.XPATH,"//div[@role='listbox']//span[text()='Account Assistant']")
     def __init__(self, driver):
         super().__init__(driver)
         
@@ -63,7 +64,10 @@ class Vacancy(BasePage):
         wait = WebDriverWait(self.driver, 10)
         wait.until(EC.presence_of_element_located((self.ADD_DESCRIPTION))).send_keys("Automation Tester For Current Date")
 
-        Select(self.driver.find_element(By.ID, 'class="oxd-select-text oxd-select-text--active"')).select_by_visible_text("Automation Tester")
+        # Select(self.driver.find_element(By.ID, 'class="oxd-select-text oxd-select-text--active"')).select_by_visible_text("Automation Tester")
+        self.click(self.DROPDOWN)
+        sleep(5)
+        self.click(self.JOB_TITLE)
         self.driver.find_element(By.ID, "addJobVacancy_description").send_keys("Automation Tester Is Running")
 
         hiring_manager = self.find_element(By.ID, "addJobVacancy_hiringManager")

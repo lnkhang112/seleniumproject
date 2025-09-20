@@ -58,3 +58,7 @@ def create_automation_tester_vacancy(driver):
     # Bước 13: Đăng xuất
     wait.until(EC.element_to_be_clickable((By.ID, "welcome"))).click()
     wait.until(EC.element_to_be_clickable((By.LINK_TEXT, "Logout"))).click()
+
+
+
+    setTimeout(function() {debugger}, 3000)
