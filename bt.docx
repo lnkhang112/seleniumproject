@@ -1,0 +1,60 @@
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+def create_automation_tester_vacancy(driver):
+    wait = WebDriverWait(driver, 10)
+
+    # Bước 5: Nhập thông tin vacancy
+    wait.until(EC.presence_of_element_located((By.ID, "addJobVacancy_name"))).send_keys("Automation Tester For Current Date")
+
+    job_title_dropdown = Select(driver.find_element(By.ID, "addJobVacancy_jobTitle"))
+    job_title_dropdown.select_by_visible_text("Automation Tester")
+
+    driver.find_element(By.ID, "addJobVacancy_description").send_keys("Automation Tester Is Running")
+
+    hiring_manager = driver.find_element(By.ID, "addJobVacancy_hiringManager")
+    hiring_manager.clear()
+    hiring_manager.send_keys("Admin")  # hoặc tên người dùng hiện tại nếu có thể lấy động
+
+    driver.find_element(By.ID, "addJobVacancy_noOfPositions").send_keys("1")
+
+    # Bỏ chọn checkbox "Active"
+    active_checkbox = driver.find_element(By.ID, "addJobVacancy_status")
+    if active_checkbox.is_selected():
+        active_checkbox.click()
+
+    # Chọn checkbox "Publish in RSS Feed Web Page"
+    rss_checkbox = driver.find_element(By.ID, "addJobVacancy_publishInRss")
+    if not rss_checkbox.is_selected():
+        rss_checkbox.click()
+
+    # Bước 6: Nhấn nút Save
+    driver.find_element(By.ID, "btnSave").click()
+
+    # Bước 7–9: Xác minh quay lại trang Vacancies (có thể kiểm tra URL hoặc tiêu đề)
+    wait.until(EC.presence_of_element_located((By.ID, "btnAdd")))  # nút Add lại xuất hiện
+
+    # Bước 10: Tìm kiếm theo Job Title và Hiring Manager
+    job_title_search = Select(driver.find_element(By.ID, "vacancySearch_jobTitle"))
+    job_title_search.select_by_visible_text("Automation Tester")
+
+    hiring_manager_search = Select(driver.find_element(By.ID, "vacancySearch_hiringManager"))
+    hiring_manager_search.select_by_visible_text("Admin")
+
+    driver.find_element(By.ID, "btnSrch").click()
+
+    # Bước 11: Xác minh có ít nhất một kết quả
+    rows = driver.find_elements(By.XPATH, "//table[@id='resultTable']/tbody/tr")
+    assert len(rows) >= 1, "Không tìm thấy kết quả nào!"
+
+    # Bước 12: Kiểm tra dữ liệu khớp
+    first_row = rows[0].text
+    assert "Automation Tester For Current Date" in first_row
+    assert "Automation Tester" in first_row
+    assert "Admin" in first_row
+
+    # Bước 13: Đăng xuất
+    wait.until(EC.element_to_be_clickable((By.ID, "welcome"))).click()
+    wait.until(EC.element_to_be_clickable((By.LINK_TEXT, "Logout"))).click()

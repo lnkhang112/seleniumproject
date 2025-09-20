@@ -11,7 +11,7 @@ from base.base_page import BasePage
 class Recruitment(BasePage):
     Recruitment = (By.XPATH, "//span[text()='Recruitment']")
     header = (By.XPATH, "//h5[text()='Candidates']")
-    vacancies = (By.XPATH, "//a[@class='oxd-topbar-body-nav-tab-item']")
+    VACANCY = (By.XPATH, "//a[text()='Vacancies']")
     
     
     def __init__(self,driver):
@@ -26,5 +26,6 @@ class Recruitment(BasePage):
         self.wait.until(EC.presence_of_element_located(self.header)).click()
 
     def verify_vacancies_tab(self):
-        self.click(self.vacancies)
+        # self.click(self.vacancies)
+        self.wait.until(EC.presence_of_element_located(self.VACANCY)).click()
     
